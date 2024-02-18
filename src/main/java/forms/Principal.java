@@ -1,43 +1,73 @@
-public class Principal extends javax.swing.JDialog {
-private javax.swing.JPanel contentPane;
-private javax.swing.JButton buttonOK;
-private javax.swing.JButton buttonCancel;
+package forms;
 
-public Principal(){
-setContentPane(contentPane);
-setModal(true);
-getRootPane().setDefaultButton(buttonOK);
+import javax.swing.*;
+import java.awt.event.*;
+import java.util.Random;
 
-buttonOK.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onOK();}});
+public class Principal extends JDialog {
+    private JPanel contentPane;
+    private JButton btnGenerate;
+    private JButton btnExit;
+    private JTextArea txtMsg;
+    private JLabel lblTitle;
+    private String[] mensajes = {
+            "El éxito es la suma de pequeños esfuerzos repetidos día tras día.",
+            "Cree en ti mismo y todo será posible.",
+            "El único camino hacia adelante es a través de tus propios pasos.",
+            "La perseverancia es la clave del éxito.",
+            "Cada desafío es una oportunidad para crecer y aprender.",
+            "Las mejores vistas siempre llegan después de las subidas más difíciles.",
+            "Nunca subestimes el poder de tus sueños.",
+            "El cambio comienza con una sola decisión.",
+            "Confía en el proceso, incluso cuando no entiendas el camino.",
+            "Haz hoy lo que otros no quieren para tener mañana lo que otros no pueden.",
+            "Las oportunidades no suelen caer del cielo; hay que salir a buscarlas.",
+            "La felicidad no es el destino, es el camino.",
+            "Cada pequeño paso te acerca más a tus grandes sueños.",
+            "El éxito no es definitivo, el fracaso no es fatal: lo que cuenta es el coraje para continuar.",
+            "Tu actitud determina tu dirección.",
+            "La verdadera fuerza proviene de levantarse cada vez que caes.",
+            "Sé la razón por la que alguien cree en la bondad del mundo.",
+            "El optimismo es la fe que conduce al logro.",
+            "Los obstáculos son simplemente oportunidades disfrazadas.",
+            "No hay límites para lo que puedes lograr cuando crees en ti mismo."
+    };
 
-buttonCancel.addActionListener(new java.awt.event.ActionListener(){public void actionPerformed(java.awt.event.ActionEvent e){onCancel();}});
+    public Principal() {
+        setSize(400, 300);
+        setLocationRelativeTo(null);// Centrar el formulario en la pantalla
+        setContentPane(contentPane);
+        setModal(true);
 
- // call onCancel() when cross is clicked
-setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-addWindowListener(new java.awt.event.WindowAdapter() {
-  public void windowClosing(java.awt.event.WindowEvent e) {
-   onCancel();
-  }
-});
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        btnGenerate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                msgGenerate();
+            }
+        });
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                exit();
+            }
+        });
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                exit();
+            }
+        });
+    }
 
- // call onCancel() on ESCAPE
-contentPane.registerKeyboardAction(  new java.awt.event.ActionListener() {    public void actionPerformed(java.awt.event.ActionEvent e) {      onCancel();
-    }  },  javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0),  javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);}
 
-private void onOK(){
- // add your code here
-dispose();
-}
+    private void msgGenerate() {
 
-private void onCancel(){
- // add your code here if necessary
-dispose();
-}
+        Random rand = new Random();
+        int i = rand.nextInt(mensajes.length);
+        String mensaje= mensajes[i];
+        txtMsg.setText(mensaje);
 
-public static void main(String[] args){
-Principal dialog = new Principal();
-dialog.pack();
-dialog.setVisible(true);
-System.exit(0);
-}
+    }
+
+    private void exit() {
+        dispose();
+    }
 }
