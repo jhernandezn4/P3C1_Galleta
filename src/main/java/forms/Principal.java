@@ -56,15 +56,11 @@ public class Principal extends JDialog {
             }
         });
     }
-
-
     private void msgGenerate() {
-
         Random rand = new Random();
         int i = rand.nextInt(mensajes.length);
         String mensaje= mensajes[i];
         txtMsg.setText(mensaje);
-
     }
 
     private void exit() {
